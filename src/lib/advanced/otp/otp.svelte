@@ -10,7 +10,7 @@
 </script>
 
 <script lang="ts">
-	import { cn } from '$lib/utilities/utils.js';
+	import { cn } from '$lib/utilities/class.js';
 	import { createEventDispatcher, setContext } from 'svelte';
 
 	const dispatch = createEventDispatcher<{

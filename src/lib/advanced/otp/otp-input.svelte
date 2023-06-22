@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher, getContext } from 'svelte';
 	import { DIGIT_REGEX, type OtpCtxType } from './otp.svelte';
-	import { cn } from '$lib/utilities/utils.js';
+	import { cn } from '$lib/utilities/class.js';
 
 	const ctx = getContext<OtpCtxType>('ctx');
 
@@ -117,7 +117,7 @@
 	placeholder={ctx.placeholder}
 	disabled={ctx.disabled}
 	class={cn(
-		'focus:border-primary-600 focus:ring-primary-600 w-12 appearance-none rounded-md border border-gray-300 text-center text-2xl placeholder-gray-400 shadow-sm focus:outline-none',
+		'focus:border-brand-600 focus:ring-brand-600 w-12 appearance-none rounded-md border border-gray-300 text-center text-2xl placeholder-gray-400 shadow-sm focus:outline-none',
 		className
 	)}
 	{...$$restProps}

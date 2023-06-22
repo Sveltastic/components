@@ -33,12 +33,18 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"svelte": "^3.54.0"
+		"svelte": "^4.0.0"
+	},
+	"dependencies": {
+		"class-variance-authority": "^0.6.0",
+		"clsx": "^1.2.1",
+		"lucide-svelte": "^0.244.0",
+		"tailwind-merge": "^1.13.2"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
-		"@sveltejs/kit": "^1.5.0",
+		"@sveltejs/kit": "^1.20.4",
 		"@sveltejs/package": "^2.0.0",
 		"@tailwindcss/aspect-ratio": "^0.4.2",
 		"@tailwindcss/container-queries": "^0.1.1",
@@ -48,28 +54,22 @@
 		"autoprefixer": "^10.4.14",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-svelte": "^2.26.0",
+		"eslint-plugin-svelte": "^2.30.0",
 		"postcss": "^8.4.24",
 		"prettier": "^2.8.0",
 		"prettier-plugin-organize-imports": "^3.2.2",
-		"prettier-plugin-svelte": "^2.8.1",
+		"prettier-plugin-svelte": "^2.10.1",
 		"prettier-plugin-tailwindcss": "^0.3.0",
 		"publint": "^0.1.9",
-		"svelte": "^3.54.0",
-		"svelte-check": "^3.0.1",
+		"svelte": "^4.0.0",
+		"svelte-check": "^3.4.3",
 		"tailwindcss": "^3.3.2",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
-		"vite": "^4.3.0",
+		"vite": "^4.3.6",
 		"vitest": "^0.25.3"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module",
-	"dependencies": {
-		"class-variance-authority": "^0.6.0",
-		"clsx": "^1.2.1",
-		"lucide-svelte": "^0.244.0",
-		"tailwind-merge": "^1.13.2"
-	}
+	"type": "module"
 }

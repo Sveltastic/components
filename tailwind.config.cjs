@@ -8,17 +8,18 @@ module.exports = {
 			colors: () => ({
 				// use tool https://javisperez.github.io/tailwindcolorshades/
 				brand: {
-					50: '#fef8fb',
-					100: '#fef1f7',
-					200: '#fcdceb',
-					300: '#fac7df',
-					400: '#f69cc6',
-					500: '#f272ae',
-					600: '#da679d',
-					700: '#b65683',
-					800: '#914468',
-					900: '#773855',
-					default: '#00d395'
+					50: '#edf7f6',
+					100: '#e1f2ef',
+					200: '#b6ded6',
+					300: '#91c9bc',
+					400: '#50a18a',
+					500: '#23795c',
+					600: '#1c6b4e',
+					700: '#14593c',
+					800: '#0c472c',
+					900: '#07361d',
+					950: '#032411',
+					default: '#50a18a'
 				}
 			}),
 			fontFamily: {
