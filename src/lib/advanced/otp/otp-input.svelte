@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, getContext } from 'svelte';
-	import { DIGIT_REGEX, type OtpCtxType } from './otp.svelte';
+	import { DIGIT_REGEX, isValueDigit, isValueNonEmptySpace, type OtpCtxType } from './otp.svelte';
 	import { cn } from '$lib/utilities/class.js';
 
 	const ctx = getContext<OtpCtxType>('ctx');
@@ -20,25 +20,27 @@
 		const target = event.target as HTMLInputElement;
 		let targetValue = target.value.trim();
 
-		const isTargetValueDigit = DIGIT_REGEX.test(targetValue);
+		const isTargetValueValid = ctx.isNumberInput
+			? isValueDigit(targetValue)
+			: isValueNonEmptySpace(targetValue);
 
-		if (!isTargetValueDigit && targetValue !== '') {
+		if (!isTargetValueValid && targetValue !== '') {
 			return;
 		}
 
 		const nextInputEl = target.nextElementSibling as HTMLInputElement | null;
 
 		// only delete digit if next input element has no value
-		if (!isTargetValueDigit && nextInputEl && nextInputEl.value !== '') {
+		if (!isTargetValueValid && nextInputEl && nextInputEl.value !== '') {
 			return;
 		}
 
-		targetValue = isTargetValueDigit ? targetValue : ' ';
+		targetValue = isTargetValueValid ? targetValue : ' ';
 		const targetValueLength = targetValue.length;
 
 		if (targetValueLength === 1) {
 			const newValue = ctx.value.substring(0, index) + targetValue + ctx.value.substring(index + 1);
-			if (!isTargetValueDigit) return;
+			if (!isTargetValueValid) return;
 			focusToNextInput(target);
 
 			dispatch('change', newValue);
@@ -90,7 +92,11 @@
 	};
 
 	const focusToNextInput = (target: HTMLElement) => {
-		const nextElementSibling = target.nextElementSibling as HTMLInputElement | null;
+		let nextElementSibling = target.nextElementSibling as HTMLInputElement | null;
+
+		if (nextElementSibling?.type !== 'input') {
+			nextElementSibling = nextElementSibling?.nextElementSibling as HTMLInputElement | null;
+		}
 
 		if (nextElementSibling) {
 			nextElementSibling.focus();
@@ -98,7 +104,12 @@
 	};
 
 	const focusToPrevInput = (target: HTMLElement) => {
-		const previousElementSibling = target.previousElementSibling as HTMLInputElement | null;
+		let previousElementSibling = target.previousElementSibling as HTMLInputElement | null;
+
+		if (previousElementSibling?.type !== 'input') {
+			previousElementSibling =
+				previousElementSibling?.previousElementSibling as HTMLInputElement | null;
+		}
 
 		if (previousElementSibling) {
 			previousElementSibling.focus();
@@ -111,13 +122,11 @@
 	on:keydown={handleInputKeyDown}
 	on:focus={handleInputFocus}
 	on:input={handleInputChange}
-	type="text"
+	type="password"
 	inputMode="numeric"
 	autoComplete="one-time-code"
-	placeholder={ctx.placeholder}
-	disabled={ctx.disabled}
 	class={cn(
-		'focus:border-brand-600 focus:ring-brand-600 w-12 appearance-none rounded-md border border-gray-300 text-center text-2xl placeholder-gray-400 shadow-sm focus:outline-none',
+		'bg-secondary text-primary focus:border-primary focus:ring-primary w-12 appearance-none rounded-md border border-primary/75 text-center text-2xl placeholder-primary/60 shadow-sm focus:outline-none disabled:cursor-not-allowed disabled:text-primary/50',
 		className
 	)}
 	{...$$restProps}
